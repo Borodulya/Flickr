@@ -12,7 +12,7 @@
 @interface SBServerManager ()
 
 @property (strong, nonatomic) AFHTTPRequestOperationManager* RequestOperationManager;
-@property (nonatomic, strong) OFFlickrAPIRequest *request;
+
 @property (nonatomic, strong) OFFlickrAPIContext *context;
 
 @end
@@ -28,11 +28,8 @@
         manager = [[SBServerManager alloc] init];
     });
     
-    
     return manager;
 }
-
-
 
 - (instancetype)init
 {
@@ -48,59 +45,34 @@
         self.request = [[OFFlickrAPIRequest alloc] initWithAPIContext:self.context];
         [self.request setDelegate:self];
         
-        [self.request callAPIMethodWithGET:@"flickr.interestingness.getList" arguments:[NSDictionary dictionaryWithObjectsAndKeys:@"b7feaac025b0fe2495172aaee44a6660", @"api_key",
-                                            @"description",@"extras",
-                                            @(10),     @"per_page",
+        [self.request callAPIMethodWithGET:@"flickr.interestingness.getList" arguments:[NSDictionary dictionaryWithObjectsAndKeys:   @"url_n",  @"extras",
+                                            @(20),     @"per_page",
                                             @(1),      @"page", nil]];
             }
     return self;
 }
-
-//- (void) getPhotoWithOffset:(NSInteger) offset
-//                        countPage:(NSInteger) countPage
-//                    onSuccess:(void(^)(NSArray* photoDict)) success
-//                    onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure {
-//
-//   NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
-//                               @"b7feaac025b0fe2495172aaee44a6660", @"api_key",
-//                               //@"YYYY-MM-DD", @"date",
-//                               @"description",      @"extras",
-//                               @(10),     @"per_page",
-//                               @(1),      @"page",
-//                            nil];
-//    
-//    [self.RequestOperationManager
-//    GET:@"flickr.interestingness.getList"
-//     parameters:params
-//     success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//         NSLog(@"JSON: %@", responseObject);
-//         NSMutableArray* flickrPhotos = [responseObject objectForKey:@"photos"];
-//         
-//                  if (success) {
-//             success(flickrPhotos);
-//         }
-//     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//         NSLog(@"Error: %@", error);
-//         if (failure) {
-//             failure(error, operation.response.statusCode);
-//         }
-//     }];
-//    }
 
 #pragma mark - <OFFlickrAPIRequestDelegate>
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest
  didCompleteWithResponse:(NSDictionary *)inResponseDictionary
 {
-    NSDictionary *photoDict = [[inResponseDictionary valueForKeyPath:@"photos.photo"] objectAtIndex:0];
-	
-	NSURL *photoURL = [self.context photoSourceURLFromDictionary:photoDict size:OFFlickrLargeSize];
     
-    NSData * imageData = [[NSData alloc] initWithContentsOfURL:photoURL];
-    UIImage* image = [UIImage imageWithData: imageData];
+    NSMutableArray* photoArray = [NSMutableArray array];
     
+    for (int i = 0; i < 20; i++) {
+        NSDictionary *photoDict = [[inResponseDictionary valueForKeyPath:@"photos.photo"] objectAtIndex:i];
+        NSURL *photoURL = [self.context photoSourceURLFromDictionary:photoDict size:OFFlickrSmallSize320];
+        NSData * imageData = [[NSData alloc] initWithContentsOfURL:photoURL];
+        UIImage* image = [UIImage imageWithData: imageData];
+        self.image = image;
+        [photoArray addObject:image];
+        
+    }
+    self.photoArray = photoArray;
+    NSLog(@"%@", photoArray);
     
-}
+   }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)inRequest didFailWithError:(NSError *)inError
 {

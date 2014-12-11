@@ -11,17 +11,16 @@
 
 @interface SBServerManager : NSObject <OFFlickrAPIRequestDelegate>
 
+@property (nonatomic, strong) OFFlickrAPIRequest *request;
+@property (strong, nonatomic) UIImage* image;
+@property (strong, nonatomic) NSMutableArray* photoArray;
+
 + (SBServerManager *) sharedManeger;
 
 //- (void) getPhotoWithOffset:(NSInteger) offset
 //                    countPage:(NSInteger) countPage
 //                    onSuccess:(void(^)(NSArray* friends)) success
 //                    onFailure:(void(^)(NSError* error, NSInteger statusCode)) failure;
-
-
-
-
-
 
 
 @end

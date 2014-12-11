@@ -12,7 +12,8 @@
 
 @interface SBViewController ()
 
-@property (strong, nonatomic) NSMutableArray* picturesArray;
+@property (strong, nonatomic) NSDictionary* picturesArray;
+@property (strong, nonatomic) SBServerManager* manager;
 
 @end
 
@@ -22,7 +23,7 @@
 {
     [super viewDidLoad];
     
-	self.picturesArray = [NSMutableArray array];
+	self.picturesArray = [NSDictionary dictionary];
     
     [self getPicturesFromServer];
 }
@@ -33,26 +34,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 #pragma mark - API
 
 - (void) getPicturesFromServer {
+    SBServerManager* manager = [[SBServerManager alloc] init];
     
-    SBServerManager *manager = [SBServerManager sharedManeger];
+    [self.tableView reloadData];
+    self.manager = manager;
+    
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.picturesArray count] + 1;
+    return 20;
 }
-
-- (NSInteger)numberOfRowsInSection:(NSInteger)section
-{
-    return 10;
-}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -63,11 +60,13 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:idetifier];
         
-        cell.textLabel.text = @"Sekfsthfyyv";
+        //cell.textLabel.text = @"textLabel";
+        
+        cell.imageView.image = self.manager.image;
+        
     }
     
     return cell;
 }
-
 
 @end

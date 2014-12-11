@@ -6,47 +6,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestAPIsForFlickr/SBServerManager.m"
-            timestampString = "439732815.358287"
+            filePath = "TestAPIsForFlickr/SBViewController.m"
+            timestampString = "439933392.303691"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-flickrAPIRequest:didFailWithError:"
-            landmarkType = "5">
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "@implementation SBViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TestAPIsForFlickr/SBServerManager.m"
-            timestampString = "439732817.121895"
+            timestampString = "440014603.375059"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-flickrAPIRequest:imageUploadSentBytes:totalBytes:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestAPIsForFlickr/SBServerManager.m"
-            timestampString = "439665095.984044"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "-flickrAPIRequest:didCompleteWithResponse:"
             landmarkType = "5">
          </BreakpointContent>
